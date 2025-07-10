@@ -1,5 +1,5 @@
 # Usa una imagen oficial de Python 3.11 (slim para menor tamaño)
-FROM python:3.11-slim
+FROM python:3.11
 
 # Instala ffmpeg y otras dependencias del sistema necesarias para bots de música
 RUN apt-get update && apt-get install -y \
