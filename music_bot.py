@@ -53,7 +53,7 @@ class YTDLSource(discord.PCMVolumeTransformer):
         if 'entries' in data:
             # Es una playlist
             return [cls(discord.FFmpegPCMAudio(entry['url'], **ffmpeg_options), data=entry) 
-                   for entry in data['entries'] if entry]
+                    for entry in data['entries'] if entry]
         else:
             # Es un video individual
             filename = data['url'] if stream else ytdl.prepare_filename(data)
