@@ -6,6 +6,19 @@ import os
 from collections import deque
 import re
 
+from threading import Thread
+from flask import Flask
+
+def run_web():
+    app = Flask('')
+
+    @app.route('/')
+    def home():
+        return "Bot de música activo!"
+
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
+
 # Configuración del bot
 intents = discord.Intents.default()
 intents.message_content = True
@@ -217,6 +230,10 @@ async def volume(ctx, volume: int):
 
 # Ejecutar el bot
 if __name__ == "__main__":
+    # Iniciar el servidor web en un hilo separado
+    Thread(target=run_web).start()
+    
+    # Ejecutar el bot
     TOKEN = os.getenv('DISCORD_TOKEN')
     if not TOKEN:
         print("❌ Error: No se encontró el token de Discord")
